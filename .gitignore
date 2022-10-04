@@ -1,3 +1,4 @@
-compile.json
+compile_commands.json
 *.o
 *.hex
+*.out
