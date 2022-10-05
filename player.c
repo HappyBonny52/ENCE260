@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdint.h>
-#include "playfield.h"
 #include "player.h"
+
+Player_t player_init (int8_t xpos, int8_t ypos) {
+    return (Player_t) {.xpos = xpos, .ypos = ypos};
+}
 
 void move_x_pos(int8_t direction, Player_t* player) {
     if (direction == 1) {
