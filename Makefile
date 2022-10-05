@@ -34,8 +34,13 @@ player.o: player.c player.h
 display.o: display.c ../../drivers/avr/system.h ../../drivers/avr/pio.h player.h display.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+navswitch.o: ../../drivers/navswitch.c ../../drivers/avr/delay.h ../../drivers/avr/pio.h ../../drivers/avr/system.h ../../drivers/navswitch.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+controls.o: controls.c ../../drivers/navswitch.h controls.h
+
 # Link: create ELF output file from object files.
-game.out: game.o system.o pio.o pacer.o player.o display.o
+game.out: game.o system.o pio.o pacer.o player.o display.o navswitch.o controls.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
