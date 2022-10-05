@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "playfield.h"
-
-typedef struct Player_t {
-    int8_t xpos;
-    int8_t ypos;
-} Player_t;
+#include "player.h"
 
 void move_x_pos(int8_t direction, Player_t* player) {
     if (direction == 1) {
@@ -36,9 +32,4 @@ void move_y_pos(int8_t direction, Player_t* player) {
         player->ypos = BOARDHEIGHT;
     }
 }
-int main(void) {
-    Player_t player = {.xpos = 0, .ypos = 0};
-    printf("%i\n", player.xpos);
-    move_x_pos(1, &player);
-    printf("%i\n", player.xpos);
-}
+
