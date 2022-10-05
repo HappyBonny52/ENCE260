@@ -11,15 +11,17 @@ int main (void)
     pacer_init (300);
     display_init ();
     navswitch_init ();
-    Player_t player = player_init(3, 0);
+    Player_t player = player_init(3, 4);
     uint8_t tick = 0;
     Action_e action = null;
 
     while (1)
     {
         pacer_wait();
-        display_player(&player);
         tick ++;
+        if ((tick % 2) == 0) {
+            display_player(&player);
+        }
         if (tick >= 20) {
             action = navswitch_poll();
             handle_player(&player, action);

@@ -5,7 +5,9 @@
 
 #include "display.h"
 
-
+/* Useful arrays for mapping columns and rows on pio
+ * NOTE: Columns and rows are swapped from the datasheet model
+ * as the game is designed for the funkit to be played sideways */
 static const pio_t cols[] =
 {
     LEDMAT_ROW1_PIO, LEDMAT_ROW2_PIO, LEDMAT_ROW3_PIO, 
@@ -13,8 +15,6 @@ static const pio_t cols[] =
     LEDMAT_ROW7_PIO
 };
 
-
-/** Define PIO pins driving LED matrix columns.  */
 static const pio_t rows[] =
 {
     LEDMAT_COL1_PIO, LEDMAT_COL2_PIO, LEDMAT_COL3_PIO,
@@ -35,12 +35,18 @@ void display_player(Player_t* player) {
     static uint8_t prev_col = 0;
     static uint8_t prev_row = 0;
 
+    // Light up new player position
     pio_output_low(cols[player->xpos]);
     pio_output_low(rows[player->ypos]);
 
+    if (prev_col == player->xpos && prev_row == player->ypos) {
+        return;
+    }
+    // Dim old player position
     pio_output_high(cols[prev_col]);
     pio_output_high(rows[prev_row]);
 
+    // Record previous position
     prev_col = player->xpos;
     prev_row = player->ypos;
 }
