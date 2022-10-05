@@ -16,16 +16,26 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c ../../drivers/avr/system.h
+game.o: game.c ../../drivers/avr/system.h pacer.h display.h player.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 system.o: ../../drivers/avr/system.c ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+pio.o: ../../drivers/avr/pio.c ../../drivers/avr/pio.h ../../drivers/avr/system.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
+pacer.o: pacer.c ../../drivers/avr/system.h pacer.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+player.o: player.c player.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+display.o: display.c ../../drivers/avr/system.h ../../drivers/avr/pio.h player.h display.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
-game.out: game.o system.o
+game.out: game.o system.o pio.o pacer.o player.o display.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
