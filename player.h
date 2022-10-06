@@ -3,8 +3,8 @@
 
 #include <stdint.h>
 
-#define BOARDWIDTH 6
-#define BOARDHEIGHT 4
+#define BOARDWIDTH 7
+#define BOARDHEIGHT 5
 
 typedef struct Player_t {
     int8_t xpos;
