@@ -1,5 +1,6 @@
 #include "controls.h"
 #include "navswitch.h"
+#include "bullet.h"
 
 Action_e navswitch_poll(void) {
     navswitch_update();
@@ -9,10 +10,10 @@ Action_e navswitch_poll(void) {
     if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
         return (Action_e) right;
     }
-    if (navswitch_push_event_p(NAVSWITCH_WEST)) {
+    if (navswitch_push_event_p(NAVSWITCH_EAST)) {
         return (Action_e) down;
     }
-    if (navswitch_push_event_p(NAVSWITCH_EAST)) {
+    if (navswitch_push_event_p(NAVSWITCH_WEST)) {
         return (Action_e) up;
     }
     if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
@@ -34,6 +35,9 @@ void handle_player(Player_t *player, Action_e action) {
             break;
         case up:
             move_y_pos(1, player);
+            break;
+        case attack:
+            spawn_bullet(player);
             break;
         default:
             break;

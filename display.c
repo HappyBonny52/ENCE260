@@ -31,36 +31,15 @@ void display_init(void) {
     }
 }
 
-/* void display_player(Player_t* player) { */
-/*     static uint8_t prev_col = 0; */
-/*     static uint8_t prev_row = 0; */
-/**/
-/*     // Light up new player position */
-/*     pio_output_low(cols[player->xpos]); */
-/*     pio_output_low(rows[player->ypos]); */
-/**/
-/*     if (prev_col == player->xpos && prev_row == player->ypos) { */
-/*         return; */
-/*     } */
-/*     // Dim old player position */
-/*     pio_output_high(cols[prev_col]); */
-/*     pio_output_high(rows[prev_row]); */
-/**/
-/*     // Record previous position */
-/*     prev_col = player->xpos; */
-/*     prev_row = player->ypos; */
-/* } */
-/**/
-
-void display_dot(int8_t x, int8_t y) {
-    static uint8_t prev_row = 0;
+void display_player(Player_t* player) {
     static uint8_t prev_col = 0;
+    static uint8_t prev_row = 0;
 
     // Light up new player position
-    pio_output_low(cols[x]);
-    pio_output_low(rows[y]);
+    pio_output_low(cols[player->xpos]);
+    pio_output_low(rows[player->ypos]);
 
-    if (prev_row == x && prev_col == y) {
+    if (prev_col == player->xpos && prev_row == player->ypos) {
         return;
     }
     // Dim old player position
@@ -68,7 +47,24 @@ void display_dot(int8_t x, int8_t y) {
     pio_output_high(rows[prev_row]);
 
     // Record previous position
-    prev_row = x;
-    prev_col = y;
+    prev_col = player->xpos;
+    prev_row = player->ypos;
+}
+
+void clear_row(int8_t x) {
+    pio_output_high(cols[x]);
+    pio_output_high(rows[4]);
+}
+
+void display_dot(int8_t x, int8_t y) {
+    display_init();
+
+    pio_output_low(cols[x]);
+    pio_output_low(rows[y]);
+
+    /* if (prev_col == x && prev_row == y) { */
+    /*     return; */
+    /* } */
+    // Dim old player position
 }
 

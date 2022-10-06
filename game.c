@@ -4,28 +4,33 @@
 #include "pacer.h"
 #include "controls.h"
 #include "navswitch.h"
+#include "bullet.h"
 
 int main (void)
 {
     system_init ();
-    pacer_init (300);
+    pacer_init (500);
     display_init ();
     navswitch_init ();
-    Player_t player = player_init(3, 4);
+    Player_t player = player_init(3, 0);
     uint8_t tick = 0;
-    Action_e action = null;
 
     while (1)
     {
         pacer_wait();
         tick ++;
-        if ((tick % 2) == 0) {
+        if ((tick % 4) == 0) {
+            display_bullet();
+            /* display_dot(player.xpos, player.ypos); */
             display_player(&player);
         }
-        if (tick >= 20) {
-            action = navswitch_poll();
+        if ((tick % 20) == 0) {
+            Action_e action = navswitch_poll();
             handle_player(&player, action);
-            action = null;
+        }
+
+        if (tick >= 100) {
+            move_self_bullets();
             tick = 0;
         }
     }
