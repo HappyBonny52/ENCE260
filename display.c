@@ -1,13 +1,11 @@
+#include <stdlib.h>
 #include "system.h"
 #include "pio.h"
-/* #include "pacer.h" */
-#include <stdlib.h>
-
 #include "display.h"
 
 /* Useful arrays for mapping columns and rows on pio
  * NOTE: Columns and rows are swapped from the datasheet model
- * as the game is designed for the funkit to be played sideways */
+ * as the game is designed for the funkit to be played sideways. */
 static const pio_t cols[] =
 {
     LEDMAT_ROW1_PIO, LEDMAT_ROW2_PIO, LEDMAT_ROW3_PIO, 
@@ -15,10 +13,12 @@ static const pio_t cols[] =
     LEDMAT_ROW7_PIO
 };
 
+/* The 'rows' here are also in reverse order such that the row closest
+ * to the nav switch is considered 0 while the furthest row is considered 5. */
 static const pio_t rows[] =
 {
-    LEDMAT_COL1_PIO, LEDMAT_COL2_PIO, LEDMAT_COL3_PIO,
-    LEDMAT_COL4_PIO, LEDMAT_COL5_PIO
+    LEDMAT_COL5_PIO, LEDMAT_COL4_PIO, LEDMAT_COL3_PIO,
+    LEDMAT_COL2_PIO, LEDMAT_COL1_PIO
 };
 
 void display_init(void) {
@@ -31,15 +31,36 @@ void display_init(void) {
     }
 }
 
-void display_player(Player_t* player) {
-    static uint8_t prev_col = 0;
+/* void display_player(Player_t* player) { */
+/*     static uint8_t prev_col = 0; */
+/*     static uint8_t prev_row = 0; */
+/**/
+/*     // Light up new player position */
+/*     pio_output_low(cols[player->xpos]); */
+/*     pio_output_low(rows[player->ypos]); */
+/**/
+/*     if (prev_col == player->xpos && prev_row == player->ypos) { */
+/*         return; */
+/*     } */
+/*     // Dim old player position */
+/*     pio_output_high(cols[prev_col]); */
+/*     pio_output_high(rows[prev_row]); */
+/**/
+/*     // Record previous position */
+/*     prev_col = player->xpos; */
+/*     prev_row = player->ypos; */
+/* } */
+/**/
+
+void display_dot(int8_t x, int8_t y) {
     static uint8_t prev_row = 0;
+    static uint8_t prev_col = 0;
 
     // Light up new player position
-    pio_output_low(cols[player->xpos]);
-    pio_output_low(rows[player->ypos]);
+    pio_output_low(cols[x]);
+    pio_output_low(rows[y]);
 
-    if (prev_col == player->xpos && prev_row == player->ypos) {
+    if (prev_row == x && prev_col == y) {
         return;
     }
     // Dim old player position
@@ -47,7 +68,7 @@ void display_player(Player_t* player) {
     pio_output_high(rows[prev_row]);
 
     // Record previous position
-    prev_col = player->xpos;
-    prev_row = player->ypos;
+    prev_row = x;
+    prev_col = y;
 }
 
