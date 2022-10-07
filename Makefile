@@ -16,10 +16,16 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c ../../drivers/avr/system.h pacer.h display_main.h player.h
+game.o: game.c ../../drivers/avr/system.h pacer.h display_main.h player.h ../../utils/tinygl.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+display.o: ../../drivers/display.c ../../drivers/avr/system.h ../../drivers/display.h ../../drivers/ledmat.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 tinygl.o: ../../utils/tinygl.c ../../drivers/avr/system.h ../../drivers/display.h ../../utils/font.h ../../utils/tinygl.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+ledmat.o: ../../drivers/ledmat.c ../../drivers/avr/pio.h ../../drivers/avr/system.h ../../drivers/ledmat.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 font.o: ../../utils/font.c ../../drivers/avr/system.h ../../utils/font.h
@@ -50,7 +56,7 @@ bullet.o: bullet.c bullet.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
-game.out: game.o system.o pio.o pacer.o player.o display_main.o navswitch.o controls.o bullet.o
+game.out: game.o system.o pio.o pacer.o player.o display_main.o navswitch.o controls.o bullet.o tinygl.o font.o display.o ledmat.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

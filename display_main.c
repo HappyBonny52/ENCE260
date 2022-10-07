@@ -21,7 +21,7 @@ static const pio_t rows[] =
     LEDMAT_COL2_PIO, LEDMAT_COL1_PIO
 };
 
-void display_init(void) {
+void display_main_init(void) {
     for (size_t i = 0; i < LEDMAT_COLS_NUM; i++) {
         pio_config_set(rows[i], PIO_OUTPUT_HIGH);
     }
@@ -31,7 +31,7 @@ void display_init(void) {
     }
 }
 
-void display_player(Player_t* player) {
+void display_main_player(Player_t* player) {
     static uint8_t prev_col = 0;
     static uint8_t prev_row = 0;
 
@@ -56,8 +56,8 @@ void clear_row(int8_t x) {
     pio_output_high(rows[4]);
 }
 
-void display_dot(int8_t x, int8_t y) {
-    display_init();
+void display_main_dot(int8_t x, int8_t y) {
+    display_main_init();
 
     pio_output_low(cols[x]);
     pio_output_low(rows[y]);
