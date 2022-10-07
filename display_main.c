@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "system.h"
 #include "pio.h"
-#include "display.h"
+#include "display_main.h"
 
 /* Useful arrays for mapping columns and rows on pio
  * NOTE: Columns and rows are swapped from the datasheet model

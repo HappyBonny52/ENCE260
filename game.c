@@ -1,5 +1,5 @@
 #include "system.h"
-#include "display.h"
+#include "display_main.h"
 #include "player.h"
 #include "pacer.h"
 #include "controls.h"
