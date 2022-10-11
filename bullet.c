@@ -19,16 +19,25 @@ void move_self_bullets(void) {
         self_bullets[i] = self_bullets[i - 1];
         self_bullets[i - 1] = 0;
     }
-    if (self_bullets[BOARDHEIGHT + 1] > 0) {
-        outgoing_bullet = 8-(self_bullets[BOARDHEIGHT + 1]);
+    if (self_bullets[BOARDHEIGHT] > 0) {
+        outgoing_bullet = 7-(self_bullets[BOARDHEIGHT]);
         ir_uart_putc (outgoing_bullet);
+        ///for (size_t i = 4; i > 0; i--) {
+        ///outgoing_bullets[i]= outgoing_bullet+1;
+        ///}
     }
 }
 void ir_poll(void) {
     if (ir_uart_read_ready_p ()) {
-            outgoing_bullet = ir_uart_getc ();
-            outgoing_bullets[BOARDHEIGHT] = outgoing_bullet;
+        outgoing_bullet = ir_uart_getc ();
+        for (size_t i = 4; i > 0; i--) {
+            outgoing_bullets[i]= outgoing_bullet+1;
+        }
+        
     }
+    //for (size_t i = 4; i > 0; i--) {
+    //    outgoing_bullets[i]= outgoing_bullet+1;
+    //}
 
 }
 
@@ -37,5 +46,5 @@ void display_main_bullets(void) {
         display_entity(self_bullets[i] - 1, i);
         display_entity(outgoing_bullets[i] - 1, i);
     }
-    
+
 }

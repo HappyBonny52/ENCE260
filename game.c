@@ -31,6 +31,7 @@ int main (void)
 
     display_main_init ();
     navswitch_init ();
+    ir_uart_init ();
     
     Player_t player = player_init(3, 0);
     uint8_t tick = 0;
@@ -50,32 +51,36 @@ int main (void)
         }
         else {
             tinygl_update();
-            ir_uart_init ();
+            
             tick ++;
             if ((tick % 2) == 0) {
                 /* display_main_bullet(); */
                 /* display_dot(player.xpos, player.ypos); */
                 /* display_main_player(&player); */ 
-                
+                ir_poll();
                 display_entity(player.xpos, player.ypos);
                 display_main_bullets();
-                ir_poll();
+                
                 
             }
+            ir_poll();
 
             if ((tick % 2) == 1) {
                 tinygl_clear();
             }
+            ir_poll();
 
             if ((tick % 20) == 0) {
                 Action_e action = navswitch_poll();
                 handle_player(&player, action);
             }
+            ir_poll();
 
             if (tick >= 50) {
                 move_self_bullets();
                 tick = 0;
             }
+            ir_poll();
 
         }
         
