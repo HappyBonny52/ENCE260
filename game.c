@@ -43,20 +43,8 @@ int main (void)
             navswitch_update();
             if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
                 /* Initialise the pins of the LED matrix.  */
-                pio_config_set (LEDMAT_COL1_PIO, PIO_OUTPUT_HIGH);
-                pio_config_set (LEDMAT_COL2_PIO, PIO_OUTPUT_HIGH);
-                pio_config_set (LEDMAT_COL3_PIO, PIO_OUTPUT_HIGH);
-                pio_config_set (LEDMAT_COL4_PIO, PIO_OUTPUT_HIGH);
-                pio_config_set (LEDMAT_COL5_PIO, PIO_OUTPUT_HIGH);
-                pio_config_set (LEDMAT_ROW1_PIO, PIO_OUTPUT_HIGH);
-                pio_config_set (LEDMAT_ROW2_PIO, PIO_OUTPUT_HIGH);
-                pio_config_set (LEDMAT_ROW3_PIO, PIO_OUTPUT_HIGH);
-                pio_config_set (LEDMAT_ROW4_PIO, PIO_OUTPUT_HIGH);
-                pio_config_set (LEDMAT_ROW5_PIO, PIO_OUTPUT_HIGH);
-                pio_config_set (LEDMAT_ROW6_PIO, PIO_OUTPUT_HIGH);
-                pio_config_set (LEDMAT_ROW7_PIO, PIO_OUTPUT_HIGH);
+                display_main_init();
                 is_intro = false;
-                
                 tinygl_clear ();
             }
         }
