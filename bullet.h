@@ -9,4 +9,6 @@ void move_self_bullets(void);
 
 void display_main_bullets(void);
 
+void ir_poll(void);
+
 #endif // !BULLET_H
