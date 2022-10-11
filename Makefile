@@ -67,7 +67,7 @@ navswitch.o: ../../drivers/navswitch.c ../../drivers/avr/delay.h ../../drivers/a
 controls.o: controls.c ../../drivers/navswitch.h controls.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-bullet.o: bullet.c bullet.h
+bullet.o: bullet.c bullet.h ../../drivers/avr/pio.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.

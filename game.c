@@ -19,6 +19,7 @@ int main (void)
     bool is_intro = true;
     bool is_finished = false; //when player got shot
     system_init ();
+    pio_config_set(LED1_PIO, PIO_OUTPUT_LOW);
     /* Initialise tinygl. */
     tinygl_init(PACER_RATE);
     tinygl_font_set(&font5x7_1);
@@ -80,11 +81,9 @@ int main (void)
 
             if (tick >= 50) {
                 move_self_bullets();
-                move_outgoing_bullets();
-
+                move_outgoing_bullets(&player);
                 tick = 0;
                     
-                
                 
             }
             ir_poll();
