@@ -57,6 +57,7 @@ int main (void)
                 /* display_main_player(&player); */
                 display_entity(player.xpos, player.ypos);
                 display_main_bullets();
+                ir_poll();
             }
 
             if ((tick % 2) == 1) {
