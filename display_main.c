@@ -1,3 +1,4 @@
+#include "tinygl.h"
 #include <stdlib.h>
 #include "system.h"
 #include "pio.h"
@@ -51,20 +52,13 @@ void display_main_player(Player_t* player) {
     prev_row = player->ypos;
 }
 
-void clear_row(int8_t x) {
-    pio_output_high(cols[x]);
-    pio_output_high(rows[4]);
-}
+/* void clear_row(int8_t x) { */
+/*     pio_output_high(cols[x]); */
+/*     pio_output_high(rows[4]); */
+/* } */
 
-void display_main_dot(int8_t x, int8_t y) {
-    display_main_init();
-
-    pio_output_low(cols[x]);
-    pio_output_low(rows[y]);
-
-    /* if (prev_col == x && prev_row == y) { */
-    /*     return; */
-    /* } */
-    // Dim old player position
+void display_entity(int8_t x, int8_t y) {
+    tinygl_point_t point = {.x = y, .y = x};
+    tinygl_draw_point(point, 1);
 }
 

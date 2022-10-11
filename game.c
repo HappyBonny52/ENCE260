@@ -32,7 +32,7 @@ int main (void)
     display_main_init ();
     navswitch_init ();
     
-    Player_t player = player_init(3, 0);
+    Player_t player = player_init(3, 4);
     uint8_t tick = 0;
 
     while (1)
@@ -61,19 +61,27 @@ int main (void)
             }
         }
         else {
+            tinygl_update();
             tick ++;
-            if ((tick % 4) == 0) {
-                display_main_bullet();
+            if ((tick % 2) == 0) {
+                /* display_main_bullet(); */
                 /* display_dot(player.xpos, player.ypos); */
-                display_main_player(&player);
+                /* display_main_player(&player); */
+                display_entity(player.xpos, player.ypos);
+                /* display_main_bullet(); */
             }
+
+            if ((tick % 2) == 1) {
+                tinygl_clear();
+            }
+
             if ((tick % 20) == 0) {
                 Action_e action = navswitch_poll();
                 handle_player(&player, action);
             }
 
             if (tick >= 100) {
-                move_self_bullets();
+                /* move_self_bullets(); */
                 tick = 0;
             }
 

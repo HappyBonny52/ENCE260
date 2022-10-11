@@ -11,10 +11,10 @@ Action_e navswitch_poll(void) {
         return (Action_e) right;
     }
     if (navswitch_push_event_p(NAVSWITCH_EAST)) {
-        return (Action_e) down;
+        return (Action_e) up;
     }
     if (navswitch_push_event_p(NAVSWITCH_WEST)) {
-        return (Action_e) up;
+        return (Action_e) down;
     }
     if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
         return (Action_e) attack;
