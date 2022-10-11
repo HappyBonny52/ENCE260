@@ -32,31 +32,6 @@ void display_main_init(void) {
     }
 }
 
-void display_main_player(Player_t* player) {
-    static uint8_t prev_col = 0;
-    static uint8_t prev_row = 0;
-
-    // Light up new player position
-    pio_output_low(cols[player->xpos]);
-    pio_output_low(rows[player->ypos]);
-
-    if (prev_col == player->xpos && prev_row == player->ypos) {
-        return;
-    }
-    // Dim old player position
-    pio_output_high(cols[prev_col]);
-    pio_output_high(rows[prev_row]);
-
-    // Record previous position
-    prev_col = player->xpos;
-    prev_row = player->ypos;
-}
-
-/* void clear_row(int8_t x) { */
-/*     pio_output_high(cols[x]); */
-/*     pio_output_high(rows[4]); */
-/* } */
-
 void display_entity(int8_t x, int8_t y) {
     tinygl_point_t point = {.x = (BOARDHEIGHT - 1 - y), .y = x};
     tinygl_draw_point(point, 1);
