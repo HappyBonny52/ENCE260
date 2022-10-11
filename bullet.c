@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "bullet.h"
-#include "display.h"
+#include "display_main.h"
 
 // Array of bullets where values are x axes and index is y axes
 static uint8_t self_bullets[BOARDHEIGHT + 1] = {0};
@@ -17,13 +17,8 @@ void move_self_bullets(void) {
     }
 }
 
-void display_bullet(void) {
+void display_main_bullets(void) {
     for (size_t i = 0; i < BOARDHEIGHT; i++) {
-        if (self_bullets[i] > 0) {
-            display_dot(self_bullets[i] - 1, i);
-        }
-    }
-    if (self_bullets[BOARDHEIGHT] > 0) {
-        clear_row(self_bullets[BOARDHEIGHT]);
+        display_entity(self_bullets[i] - 1, i);
     }
 }
