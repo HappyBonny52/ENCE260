@@ -8,6 +8,7 @@
 #include "bullet.h"
 #include "tinygl.h"
 #include "../fonts/font5x7_1.h"
+#include "ir_uart.h"
 
 #define PACER_RATE 500
 #define MESSAGE_RATE 15
@@ -60,6 +61,7 @@ int main (void)
                 ir_poll();
                 display_entity(player.xpos, player.ypos);
                 display_main_bullets();
+                display_main_init();
                 
                 
             }
@@ -78,9 +80,15 @@ int main (void)
 
             if (tick >= 50) {
                 move_self_bullets();
+                move_outgoing_bullets();
+
                 tick = 0;
+                    
+                
+                
             }
             ir_poll();
+            
 
         }
         

@@ -20,24 +20,22 @@ void move_self_bullets(void) {
         self_bullets[i - 1] = 0;
     }
     if (self_bullets[BOARDHEIGHT] > 0) {
-        outgoing_bullet = 7-(self_bullets[BOARDHEIGHT]);
+        outgoing_bullet = 8-(self_bullets[BOARDHEIGHT]);
         ir_uart_putc (outgoing_bullet);
-        ///for (size_t i = 4; i > 0; i--) {
-        ///outgoing_bullets[i]= outgoing_bullet+1;
-        ///}
+    }
+    
+}
+void move_outgoing_bullets(void) {
+    for (size_t i = 0; i < BOARDHEIGHT - 1; i++) {
+        outgoing_bullets[i] = outgoing_bullets[i + 1];
+        outgoing_bullets[i + 1] = 0;
     }
 }
 void ir_poll(void) {
     if (ir_uart_read_ready_p ()) {
         outgoing_bullet = ir_uart_getc ();
-        for (size_t i = 4; i > 0; i--) {
-            outgoing_bullets[i]= outgoing_bullet+1;
-        }
-        
+        outgoing_bullets[4] = outgoing_bullet;
     }
-    //for (size_t i = 4; i > 0; i--) {
-    //    outgoing_bullets[i]= outgoing_bullet+1;
-    //}
 
 }
 
