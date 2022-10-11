@@ -58,7 +58,7 @@ void display_main_player(Player_t* player) {
 /* } */
 
 void display_entity(int8_t x, int8_t y) {
-    tinygl_point_t point = {.x = y, .y = x};
+    tinygl_point_t point = {.x = (BOARDHEIGHT - 1 - y), .y = x};
     tinygl_draw_point(point, 1);
 }
 

@@ -32,7 +32,7 @@ int main (void)
     display_main_init ();
     navswitch_init ();
     
-    Player_t player = player_init(3, 4);
+    Player_t player = player_init(3, 0);
     uint8_t tick = 0;
 
     while (1)
@@ -68,7 +68,7 @@ int main (void)
                 /* display_dot(player.xpos, player.ypos); */
                 /* display_main_player(&player); */
                 display_entity(player.xpos, player.ypos);
-                /* display_main_bullet(); */
+                display_main_bullets();
             }
 
             if ((tick % 2) == 1) {
@@ -80,8 +80,8 @@ int main (void)
                 handle_player(&player, action);
             }
 
-            if (tick >= 100) {
-                /* move_self_bullets(); */
+            if (tick >= 50) {
+                move_self_bullets();
                 tick = 0;
             }
 

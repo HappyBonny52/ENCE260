@@ -17,13 +17,8 @@ void move_self_bullets(void) {
     }
 }
 
-void display_main_bullet(void) {
+void display_main_bullets(void) {
     for (size_t i = 0; i < BOARDHEIGHT; i++) {
-        if (self_bullets[i] > 0) {
-            display_entity(i, self_bullets[i] - 1);
-        }
+        display_entity(self_bullets[i] - 1, i);
     }
-    /* if (self_bullets[BOARDHEIGHT] > 0) { */
-    /*     pass; */
-    /* } */
 }
