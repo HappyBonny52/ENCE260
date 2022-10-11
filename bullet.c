@@ -25,12 +25,10 @@ void move_self_bullets(void) {
     }
 }
 void ir_poll(void) {
-    if (ir_uart_read_ready_p ())
-               {
-                   outgoing_bullet = ir_uart_getc ();
-                   outgoing_bullets[BOARDHEIGHT] = outgoing_bullet;
-                   // Process the received byte.
-               }
+    if (ir_uart_read_ready_p ()) {
+            outgoing_bullet = ir_uart_getc ();
+            outgoing_bullets[BOARDHEIGHT] = outgoing_bullet;
+    }
 
 }
 
