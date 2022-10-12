@@ -58,7 +58,7 @@ pacer.o: pacer.c ../../drivers/avr/system.h pacer.h
 player.o: player.c player.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-display_main.o: display_main.c ../../drivers/avr/system.h ../../drivers/avr/pio.h player.h display_main.h
+display_main.o: display_main.c ../../drivers/avr/system.h ../../drivers/avr/pio.h player.h display_main.h ../../drivers/navswitch.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 navswitch.o: ../../drivers/navswitch.c ../../drivers/avr/delay.h ../../drivers/avr/pio.h ../../drivers/avr/system.h ../../drivers/navswitch.h

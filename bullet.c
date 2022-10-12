@@ -29,6 +29,7 @@ void move_self_bullets(void) {
         ir_uart_putc (outgoing_bullet);
     }
 }
+
 void move_outgoing_bullets(Player_t *player) {
     for (size_t i = 0; i < BOARDHEIGHT - 1; i++) {
         outgoing_bullets[i] = outgoing_bullets[i + 1];
@@ -36,6 +37,7 @@ void move_outgoing_bullets(Player_t *player) {
     }
     if (outgoing_bullets[player->ypos] == player->xpos + 1) {
         pio_output_high(LED1_PIO);
+        outgoing_bullets[player->ypos] = 0;
     }
 }
 void ir_poll(void) {

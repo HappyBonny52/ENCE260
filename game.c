@@ -76,6 +76,7 @@ int main (void)
             if ((tick % 20) == 0) {
                 Action_e action = navswitch_poll();
                 handle_player(&player, action);
+                pio_output_low(LED1_PIO);
             }
             ir_poll();
 

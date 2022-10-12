@@ -3,6 +3,7 @@
 #include "system.h"
 #include "pio.h"
 #include "display_main.h"
+#include "navswitch.h"
 
 /* Useful arrays for mapping columns and rows on pio
  * NOTE: Columns and rows are swapped from the datasheet model
@@ -35,5 +36,24 @@ void display_main_init(void) {
 void display_entity(int8_t x, int8_t y) {
     tinygl_point_t point = {.x = (BOARDHEIGHT - 1 - y), .y = x};
     tinygl_draw_point(point, 1);
+}
+
+void display_intro(void) {
+    bool is_intro = true;
+
+    while (is_intro) {
+        pacer_wait();
+                if (is_intro) {
+                    tinygl_update ();
+                    navswitch_update();
+                    if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+                        /* Initialise the pins of the LED matrix.  */
+                        display_main_init();
+                        is_intro = false;
+                        tinygl_clear ();
+                    }
+                }
+        }
+
 }
 
