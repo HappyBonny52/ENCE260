@@ -11,6 +11,7 @@
 // Array of bullets where values are x axes and index is y axes
 static uint8_t self_bullets[BOARDHEIGHT + 1] = {0};
 static uint8_t outgoing_bullets[BOARDHEIGHT + 1] = {0};
+static uint8_t round_count = 0;
 
 uint8_t outgoing_bullet = 0;
 
@@ -38,6 +39,11 @@ void move_outgoing_bullets(Player_t *player) {
     if (outgoing_bullets[player->ypos] == player->xpos + 1) {
         pio_output_high(LED1_PIO);
         outgoing_bullets[player->ypos] = 0;
+        display_state();
+        round_count ++;
+        if (round_count == 3) {
+            display_result();
+        }
     }
 }
 void ir_poll(void) {

@@ -4,6 +4,7 @@
 #include "pio.h"
 #include "display_main.h"
 #include "navswitch.h"
+#include "pacer.h"
 
 /* Useful arrays for mapping columns and rows on pio
  * NOTE: Columns and rows are swapped from the datasheet model
@@ -40,20 +41,63 @@ void display_entity(int8_t x, int8_t y) {
 
 void display_intro(void) {
     bool is_intro = true;
-
+    /* Set the message using tinygl_text().  */
+    tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
+    tinygl_text_dir_set(1);
+    tinygl_text("SHOOT OR DODGE!");
     while (is_intro) {
         pacer_wait();
-                if (is_intro) {
-                    tinygl_update ();
-                    navswitch_update();
-                    if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
-                        /* Initialise the pins of the LED matrix.  */
-                        display_main_init();
-                        is_intro = false;
-                        tinygl_clear ();
-                    }
-                }
+        if (is_intro) {
+            tinygl_update ();
+            navswitch_update();
+            if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+                /* Initialise the pins of the LED matrix.  */
+                display_main_init();
+                is_intro = false;
+                tinygl_clear ();
+            }
         }
-
+    }
 }
 
+void display_state(void) {
+    /* Set the message using tinygl_text().  */
+    tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
+    tinygl_text_dir_set(1);
+    tinygl_text("!HIT!");
+    bool is_player_hit =true;
+    while (is_player_hit) {
+        pacer_wait();
+        if (is_player_hit) {
+            tinygl_update ();
+            navswitch_update();
+            if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+                /* Initialise the pins of the LED matrix.  */
+                display_main_init();
+                is_player_hit = false;
+                tinygl_clear ();
+            }
+        }
+    }
+}
+
+void display_result(void) {
+    /* Set the message using tinygl_text().  */
+    tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
+    tinygl_text_dir_set(1);
+    tinygl_text("GOOD");
+    bool is_finished =true;
+    while (is_finished) {
+        pacer_wait();
+        if (is_finished) {
+            tinygl_update ();
+            navswitch_update();
+            if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+                /* Initialise the pins of the LED matrix.  */
+                display_main_init();
+                is_finished = false;
+                tinygl_clear ();
+            }
+        }
+    }
+}
