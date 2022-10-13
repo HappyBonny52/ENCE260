@@ -19,10 +19,6 @@ int main (void)
 
     system_init ();
     pio_config_set(LED1_PIO, PIO_OUTPUT_LOW);
-    /* Initialise tinygl. */
-    tinygl_init(PACER_RATE);
-    tinygl_font_set(&font3x5_1);
-    tinygl_text_speed_set(MESSAGE_RATE); //MESSAGE_RATE : the speed of the displayed message
 
 
     pacer_init (500);
@@ -50,9 +46,7 @@ int main (void)
                 ir_poll();
                 display_entity(player.xpos, player.ypos);
                 display_main_bullets();
-                display_main_init();
-                
-                
+                /* display_main_init(); */
             }
             ir_poll();
 
