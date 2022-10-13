@@ -70,8 +70,11 @@ controls.o: controls.c ../../drivers/navswitch.h controls.h
 bullet.o: bullet.c bullet.h ../../drivers/avr/pio.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+task.o: ../../utils/task.c ../../drivers/avr/system.h ../../drivers/avr/timer.h ../../utils/task.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
 # Link: create ELF output file from object files.
-game.out: game.o system.o pio.o pacer.o player.o display_main.o navswitch.o controls.o bullet.o tinygl.o font.o display.o ledmat.o ir_uart.o usart1.o timer0.o timer.o prescale.o
+game.out: game.o system.o pio.o pacer.o player.o display_main.o navswitch.o controls.o bullet.o tinygl.o font.o display.o ledmat.o ir_uart.o usart1.o timer0.o timer.o prescale.o task.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

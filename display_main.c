@@ -79,19 +79,18 @@ void display_state(void) {
     char message[4] = {games_won + '0', '-', games_lost + '0', '\0'};
     /* Set the message using tinygl_text().  */
     tinygl_text(message);
-    bool is_player_hit = true;
-    while (is_player_hit) {
+    uint8_t tick = 0;
+    while (1) {
         pacer_wait();
-        if (is_player_hit) {
-            tinygl_update ();
-            navswitch_update();
-            if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
-                /* Initialise the pins of the LED matrix.  */
-                /* display_main_init(); */
-                is_player_hit = false;
-                tinygl_clear ();
-            }
+        tinygl_update ();
+        navswitch_update();
+        if (tick > 200) {
+            /* Initialise the pins of the LED matrix.  */
+            /* display_main_init(); */
+            tinygl_clear ();
+            return;
         }
+        tick++;
     }
 }
 

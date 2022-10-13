@@ -28,30 +28,21 @@ int main (void)
 
     while (1)
     {
+        pio_output_low(LED1_PIO);
+        tick ++;
         pacer_wait();
 
-        tinygl_update();
-        tick ++;
-        if ((tick % 2) == 0) {
-            /* display_main_bullet(); */
-            /* display_dot(player.xpos, player.ypos); */
-            /* display_main_player(&player); */ 
-            ir_poll_bullets();
+        if (tick % 2 == 0) {
             display_entity(player.xpos, player.ypos);
             display_main_bullets();
-            /* display_main_init(); */
-        }
-        ir_poll_bullets();
-
-        if ((tick % 2) == 1) {
+        } else {
             tinygl_clear();
         }
-        ir_poll_bullets();
+        tinygl_update();
 
         if ((tick % 20) == 0) {
             Action_e action = navswitch_poll();
             handle_player(&player, action);
-            pio_output_low(LED1_PIO);
         }
         ir_poll_bullets();
 
@@ -60,6 +51,5 @@ int main (void)
             move_outgoing_bullets(&player);
             tick = 0;
         }
-        ir_poll_bullets();
     }
 }

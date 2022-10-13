@@ -11,14 +11,10 @@
 // Array of bullets where values are x axes and index is y axes
 static uint8_t self_bullets[BOARDHEIGHT + 1] = {0};
 static uint8_t outgoing_bullets[BOARDHEIGHT + 1] = {0};
-static uint8_t round_count = 0;
-
-uint8_t outgoing_bullet = 0;
 
 void spawn_bullet(Player_t *player) {
     self_bullets[player->ypos] = player->xpos + 1;
 }
-
 
 void move_self_bullets(void) {
     for (size_t i = BOARDHEIGHT + 1; i > 0; i--) {
@@ -26,10 +22,11 @@ void move_self_bullets(void) {
         self_bullets[i - 1] = 0;
     }
     if (self_bullets[BOARDHEIGHT] > 0) {
+        uint8_t outgoing_bullet = 0;
         outgoing_bullet = 8 - (self_bullets[BOARDHEIGHT]);
         ir_uart_putc (outgoing_bullet);
-        /* // REMOVE WHEN COMMITING */
-        /* outgoing_bullets[4] = outgoing_bullet; */
+        // REMOVE WHEN COMMITING
+        outgoing_bullets[4] = outgoing_bullet;
     }
 }
 
@@ -42,15 +39,12 @@ void move_outgoing_bullets(Player_t *player) {
         pio_output_high(LED1_PIO);
         outgoing_bullets[player->ypos] = 0;
         display_state();
-        round_count ++;
-        if (round_count == 3) {
-            display_result();
-        }
     }
 }
 
 void ir_poll_bullets(void) {
     if (ir_uart_read_ready_p ()) {
+        uint8_t outgoing_bullet = 0;
         outgoing_bullet = ir_uart_getc ();
         outgoing_bullets[4] = outgoing_bullet;
     }
@@ -61,5 +55,4 @@ void display_main_bullets(void) {
         display_entity(self_bullets[i] - 1, i);
         display_entity(outgoing_bullets[i] - 1, i);
     }
-
 }
