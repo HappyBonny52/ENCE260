@@ -1,5 +1,6 @@
-#include "tinygl.h"
 #include <stdlib.h>
+#include <string.h>
+#include "tinygl.h"
 #include "system.h"
 #include "pio.h"
 #include "display_main.h"
@@ -9,6 +10,9 @@
 
 #define PACER_RATE 500
 #define MESSAGE_RATE 30
+
+static uint8_t games_won = 0;
+static uint8_t games_lost = 0;
 
 /* Useful arrays for mapping columns and rows on pio
  * NOTE: Columns and rows are swapped from the datasheet model
@@ -41,6 +45,8 @@ void display_main_init(void) {
     tinygl_init(PACER_RATE);
     tinygl_font_set(&font3x5_1);
     tinygl_text_speed_set(MESSAGE_RATE); //MESSAGE_RATE : the speed of the displayed message
+    tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
+    tinygl_text_dir_set(1);
 }
 
 void display_entity(int8_t x, int8_t y) {
@@ -70,11 +76,10 @@ void display_intro(void) {
 }
 
 void display_state(void) {
+    char message[4] = {games_won + '0', '-', games_lost + '0', '\0'};
     /* Set the message using tinygl_text().  */
-    tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
-    tinygl_text_dir_set(1);
-    tinygl_text("!HIT!");
-    bool is_player_hit =true;
+    tinygl_text(message);
+    bool is_player_hit = true;
     while (is_player_hit) {
         pacer_wait();
         if (is_player_hit) {
@@ -82,7 +87,7 @@ void display_state(void) {
             navswitch_update();
             if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
                 /* Initialise the pins of the LED matrix.  */
-                display_main_init();
+                /* display_main_init(); */
                 is_player_hit = false;
                 tinygl_clear ();
             }
@@ -103,7 +108,7 @@ void display_result(void) {
             navswitch_update();
             if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
                 /* Initialise the pins of the LED matrix.  */
-                display_main_init();
+                /* display_main_init(); */
                 is_finished = false;
                 tinygl_clear ();
             }

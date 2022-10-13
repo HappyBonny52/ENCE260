@@ -26,15 +26,17 @@ void move_self_bullets(void) {
         self_bullets[i - 1] = 0;
     }
     if (self_bullets[BOARDHEIGHT] > 0) {
-        outgoing_bullet = 8-(self_bullets[BOARDHEIGHT]);
+        outgoing_bullet = 8 - (self_bullets[BOARDHEIGHT]);
         ir_uart_putc (outgoing_bullet);
+        /* // REMOVE WHEN COMMITING */
+        /* outgoing_bullets[4] = outgoing_bullet; */
     }
 }
 
 void move_outgoing_bullets(Player_t *player) {
     for (size_t i = 0; i < BOARDHEIGHT - 1; i++) {
         outgoing_bullets[i] = outgoing_bullets[i + 1];
-        outgoing_bullets[i + 1] = 0;      
+        outgoing_bullets[i + 1] = 0;
     }
     if (outgoing_bullets[player->ypos] == player->xpos + 1) {
         pio_output_high(LED1_PIO);
@@ -46,13 +48,14 @@ void move_outgoing_bullets(Player_t *player) {
         }
     }
 }
-void ir_poll(void) {
+
+void ir_poll_bullets(void) {
     if (ir_uart_read_ready_p ()) {
         outgoing_bullet = ir_uart_getc ();
         outgoing_bullets[4] = outgoing_bullet;
     }
-
 }
+
 void display_main_bullets(void) {
     for (size_t i = 0; i < BOARDHEIGHT; i++) {
         display_entity(self_bullets[i] - 1, i);

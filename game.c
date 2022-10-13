@@ -15,18 +15,13 @@
 
 int main (void)
 {
-
-
     system_init ();
     pio_config_set(LED1_PIO, PIO_OUTPUT_LOW);
-
-
     pacer_init (500);
-
     display_main_init ();
     navswitch_init ();
     ir_uart_init ();
-    
+
     Player_t player = player_init(3, 0);
     uint8_t tick = 0;
     display_intro();
@@ -34,47 +29,37 @@ int main (void)
     while (1)
     {
         pacer_wait();
-        
 
-            tinygl_update();
-            
-            tick ++;
-            if ((tick % 2) == 0) {
-                /* display_main_bullet(); */
-                /* display_dot(player.xpos, player.ypos); */
-                /* display_main_player(&player); */ 
-                ir_poll();
-                display_entity(player.xpos, player.ypos);
-                display_main_bullets();
-                /* display_main_init(); */
-            }
-            ir_poll();
+        tinygl_update();
+        tick ++;
+        if ((tick % 2) == 0) {
+            /* display_main_bullet(); */
+            /* display_dot(player.xpos, player.ypos); */
+            /* display_main_player(&player); */ 
+            ir_poll_bullets();
+            display_entity(player.xpos, player.ypos);
+            display_main_bullets();
+            /* display_main_init(); */
+        }
+        ir_poll_bullets();
 
-            if ((tick % 2) == 1) {
-                tinygl_clear();
-            }
-            ir_poll();
+        if ((tick % 2) == 1) {
+            tinygl_clear();
+        }
+        ir_poll_bullets();
 
-            if ((tick % 20) == 0) {
-                Action_e action = navswitch_poll();
-                handle_player(&player, action);
-                pio_output_low(LED1_PIO);
-            }
-            ir_poll();
+        if ((tick % 20) == 0) {
+            Action_e action = navswitch_poll();
+            handle_player(&player, action);
+            pio_output_low(LED1_PIO);
+        }
+        ir_poll_bullets();
 
-            if (tick >= 50) {
-                move_self_bullets();
-                move_outgoing_bullets(&player);
-                tick = 0;
-                    
-                
-            }
-            ir_poll();
-            
-
-
-        
-
-        
+        if (tick >= 50) {
+            move_self_bullets();
+            move_outgoing_bullets(&player);
+            tick = 0;
+        }
+        ir_poll_bullets();
     }
 }
