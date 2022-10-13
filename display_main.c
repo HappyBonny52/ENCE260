@@ -55,38 +55,33 @@ void display_entity(int8_t x, int8_t y) {
 }
 
 void display_intro(void) {
-    bool is_intro = true;
     /* Set the message using tinygl_text().  */
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
     tinygl_text_dir_set(1);
     tinygl_text("SHOOT OR DODGE!");
-    while (is_intro) {
+    while (true) {
         pacer_wait();
-        if (is_intro) {
-            tinygl_update ();
-            navswitch_update();
-            if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
-                /* Initialise the pins of the LED matrix.  */
-                /* display_main_init(); */
-                is_intro = false;
-                tinygl_clear ();
-            }
+        tinygl_update ();
+        navswitch_update();
+        if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+            /* Initialise the pins of the LED matrix.  */
+            /* display_main_init(); */
+            tinygl_clear ();
+            return;
         }
     }
 }
 
-void display_state(void) {
+static void display_state(void) {
     char message[4] = {games_won + '0', '-', games_lost + '0', '\0'};
     /* Set the message using tinygl_text().  */
     tinygl_text(message);
     uint8_t tick = 0;
-    while (1) {
+    while (true) {
         pacer_wait();
         tinygl_update ();
         navswitch_update();
-        if (tick > 200) {
-            /* Initialise the pins of the LED matrix.  */
-            /* display_main_init(); */
+        if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
             tinygl_clear ();
             return;
         }
@@ -94,23 +89,40 @@ void display_state(void) {
     }
 }
 
-void display_result(void) {
+static void display_result(void) {
     /* Set the message using tinygl_text().  */
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
     tinygl_text_dir_set(1);
-    tinygl_text("GOOD");
-    bool is_finished =true;
-    while (is_finished) {
+    if (games_won == 3) {
+        tinygl_text("WINNER!! ");
+    } else {
+        tinygl_text("LOSER!! ");
+    }
+    games_won = 0;
+    games_lost = 0;
+    while (true) {
         pacer_wait();
-        if (is_finished) {
-            tinygl_update ();
-            navswitch_update();
-            if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
-                /* Initialise the pins of the LED matrix.  */
-                /* display_main_init(); */
-                is_finished = false;
-                tinygl_clear ();
-            }
+        tinygl_update ();
+        navswitch_update();
+        if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+            /* Initialise the pins of the LED matrix.  */
+            /* display_main_init(); */
+            tinygl_clear ();
+            return;
         }
+    }
+}
+
+void display_end_round(bool win) {
+    if (win) {
+        games_won++;
+    }
+    else {
+        games_won--;
+    }
+    if (games_won == 3 || games_lost == 3){
+        display_result();
+    } else {
+        display_state();
     }
 }
