@@ -73,9 +73,8 @@ void display_intro(void) {
 }
 
 /* Display the state of the game in each round*/
-static void display_state(void) {
-    char message[4] = {games_won + '0', '-', games_lost + '0', '\0'};
-    /* Set the message using tinygl_text().  */
+void display_state(void) {
+    //char message[4] = {games_won + '0', '-', games_lost + '0', '\0'};
     //tinygl_text(message);
     tinygl_text("OOPS!");
     uint8_t tick = 0;
@@ -92,7 +91,7 @@ static void display_state(void) {
 }
 
 /* Display the result of the game */
-static void display_result(void) {
+void display_result(void) {
     /* Set the message using tinygl_text().  */
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
     tinygl_text_dir_set(1);
