@@ -1,7 +1,14 @@
+/** @file   controls.c
+    @author Aaron Sevilla
+    @date   5 October 2022
+    @brief  Control player's position and state by naviswith
+*/
+
 #include "controls.h"
 #include "navswitch.h"
 #include "bullet.h"
 
+/* Set the player's action by naviswitch event */
 Action_e navswitch_poll(void) {
     navswitch_update();
     if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
@@ -22,6 +29,7 @@ Action_e navswitch_poll(void) {
     return (Action_e) null;
 }
 
+/* Player handler for each action */
 void handle_player(Player_t *player, Action_e action) {
     switch (action) {
         case left:
