@@ -1,8 +1,8 @@
-
-
-
-
-
+/** @file   display_main.c
+    @author Aaron Sevilla, Bonghyun Kwon
+    @date   15 October 2022
+    @brief  Displaying game state
+*/
 #include <stdlib.h>
 #include <string.h>
 #include "tinygl.h"
@@ -17,6 +17,7 @@
 #define PACER_RATE 500
 #define MESSAGE_RATE 30
 
+/* For storing player's score */
 static uint8_t games_won = 0;
 static uint8_t games_lost = 0;
 
@@ -38,16 +39,8 @@ static uint8_t games_lost = 0;
 /*     LEDMAT_COL2_PIO, LEDMAT_COL1_PIO */
 /* }; */
 
+/* Initialise tinygl and display. */
 void display_main_init(void) {
-    /* for (size_t i = 0; i < LEDMAT_COLS_NUM; i++) { */
-    /*     pio_config_set(rows[i], PIO_OUTPUT_HIGH); */
-    /* } */
-    /**/
-    /* for (size_t i = 0; i < LEDMAT_ROWS_NUM; i++) { */
-    /*     pio_config_set(cols[i], PIO_OUTPUT_HIGH); */
-    /* } */
-    /**/
-    /* Initialise tinygl. */
     tinygl_init(PACER_RATE);
     tinygl_font_set(&font3x5_1);
     tinygl_text_speed_set(MESSAGE_RATE); //MESSAGE_RATE : the speed of the displayed message
@@ -60,6 +53,7 @@ void display_entity(int8_t x, int8_t y) {
     tinygl_draw_point(point, 1);
 }
 
+/* Display the start of the game */
 void display_intro(void) {
     /* Set the message using tinygl_text().  */
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
@@ -78,6 +72,7 @@ void display_intro(void) {
     }
 }
 
+/* Display the state of the game in each round*/
 static void display_state(void) {
     char message[4] = {games_won + '0', '-', games_lost + '0', '\0'};
     /* Set the message using tinygl_text().  */
@@ -96,6 +91,7 @@ static void display_state(void) {
     }
 }
 
+/* Display the result of the game */
 static void display_result(void) {
     /* Set the message using tinygl_text().  */
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
@@ -120,6 +116,7 @@ static void display_result(void) {
     }
 }
 
+/* Collecting score in order to identify proper display of each state */
 void display_end_round(bool win) {
     if (win) {
         games_won++;
