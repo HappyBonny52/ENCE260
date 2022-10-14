@@ -1,3 +1,8 @@
+
+
+
+
+
 #include <stdlib.h>
 #include <string.h>
 #include "tinygl.h"
@@ -76,7 +81,8 @@ void display_intro(void) {
 static void display_state(void) {
     char message[4] = {games_won + '0', '-', games_lost + '0', '\0'};
     /* Set the message using tinygl_text().  */
-    tinygl_text(message);
+    //tinygl_text(message);
+    tinygl_text("OOPS!");
     uint8_t tick = 0;
     while (true) {
         pacer_wait();
@@ -127,6 +133,7 @@ void display_end_round(bool win) {
         display_state();
     }
 }
+
 
 void poll_winner(void) {
     if (ir_uart_read_ready_p ()) {

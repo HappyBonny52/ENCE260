@@ -1,3 +1,8 @@
+/** @file   game.c
+    @author Aaron Sevilla, Bonghyun Kwon
+    @date   14 October 2022
+    @brief  
+*/
 #include "system.h"
 #include "pio.h"
 #include "display_main.h"
@@ -12,6 +17,8 @@
 
 #define PACER_RATE 500
 #define MESSAGE_RATE 30
+
+
 
 int main (void)
 {
@@ -31,7 +38,7 @@ int main (void)
         pacer_wait();
         pio_output_low(LED1_PIO);
         tick ++;
-        //poll_winner();
+        
         if (tick % 2 == 0) {
             display_entity(player.xpos, player.ypos);
             display_main_bullets();
@@ -50,6 +57,7 @@ int main (void)
         if (tick >= 40) {
             move_self_bullets();
             move_outgoing_bullets(&player);
+            poll_winner();
             tick = 0;
         }
     }

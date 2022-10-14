@@ -1,11 +1,25 @@
+/** @file   player.c
+    @author Aaron Sevilla
+    @date   5 October 2022
+    @brief  Control player's position and state.
+*/
 #include <stdio.h>
 #include <stdint.h>
 #include "player.h"
 
+
+/** Initialize player's position.
+    @param xpos pixel row
+    @param ypos pixel column
+    @return player's position in matrix  */
 Player_t player_init (int8_t xpos, int8_t ypos) {
     return (Player_t) {.xpos = xpos, .ypos = ypos};
 }
 
+
+/** The pixel state of player moving vertical.
+    @param direction 1 for player moves one row down and -1 for player moves one row up
+    @param player get the position of player to control x axis movement*/
 void move_x_pos(int8_t direction, Player_t* player) {
     if (direction == 1) {
         player->xpos++;
@@ -22,6 +36,9 @@ void move_x_pos(int8_t direction, Player_t* player) {
     }
 }
 
+/** The pixel state of player moving horizontal.
+    @param direction 1 for player moves one col up and -1 for player moves one col down
+    @param player get the position of player to control y axis movement*/  
 void move_y_pos(int8_t direction, Player_t* player) {
     if (direction == 1) {
         player->ypos++;
