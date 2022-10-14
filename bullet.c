@@ -39,8 +39,8 @@ void move_outgoing_bullets(Player_t *player) {
     if (outgoing_bullets[player->ypos] == player->xpos + 1) {
         pio_output_high(LED1_PIO);
         outgoing_bullets[player->ypos] = 0;
-        //ir_uart_putc('!');
-        //display_end_round(false);
+        ir_uart_putc('!');
+        display_end_round(false);
     }
 }
 
