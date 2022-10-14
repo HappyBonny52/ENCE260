@@ -114,7 +114,7 @@ static void display_result(void) {
     }
 }
 
-void display_end_round(bool win) {
+/*void display_end_round(bool win) {
     if (win) {
         games_won++;
     }
@@ -136,4 +136,4 @@ void poll_winner(void) {
         }
     }
 
-}
+}*/

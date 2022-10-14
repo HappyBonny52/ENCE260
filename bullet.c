@@ -28,7 +28,6 @@ void move_self_bullets(void) {
         outgoing_bullet = 8 - (self_bullets[BOARDHEIGHT]);
         ir_uart_putc (outgoing_bullet);
         // REMOVE WHEN COMMITING
-        outgoing_bullets[4] = outgoing_bullet;
     }
 }
 
@@ -40,19 +39,18 @@ void move_outgoing_bullets(Player_t *player) {
     if (outgoing_bullets[player->ypos] == player->xpos + 1) {
         pio_output_high(LED1_PIO);
         outgoing_bullets[player->ypos] = 0;
-        ir_uart_putc('!');
-        display_end_round(false);
+        //ir_uart_putc('!');
+        //display_end_round(false);
     }
 }
 
 void ir_poll_bullets(void) {
     if (ir_uart_read_ready_p ()) {
         uint8_t outgoing_bullet = ir_uart_getc ();
-        if (outgoing_bullet < 8) {
-            outgoing_bullets[4] = outgoing_bullet;
-        }
+        outgoing_bullets[4] = outgoing_bullet;
     }
 }
+
 
 void display_main_bullets(void) {
     for (size_t i = 0; i < BOARDHEIGHT; i++) {

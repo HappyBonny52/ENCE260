@@ -17,7 +17,7 @@ int main (void)
 {
     system_init ();
     pio_config_set(LED1_PIO, PIO_OUTPUT_LOW);
-    pacer_init (500);
+    pacer_init (PACER_RATE);
     display_main_init ();
     navswitch_init ();
     ir_uart_init ();
@@ -31,10 +31,11 @@ int main (void)
         pacer_wait();
         pio_output_low(LED1_PIO);
         tick ++;
-        poll_winner();
+        //poll_winner();
         if (tick % 2 == 0) {
             display_entity(player.xpos, player.ypos);
             display_main_bullets();
+            
         } else {
             tinygl_clear();
         }
