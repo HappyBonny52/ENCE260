@@ -74,9 +74,9 @@ void display_intro(void) {
 
 /* Display the state of the game in each round*/
 void display_state(void) {
-    //char message[4] = {games_won + '0', '-', games_lost + '0', '\0'};
-    //tinygl_text(message);
-    tinygl_text("OOPS!");
+    char message[4] = {games_won + '0', '-', games_lost + '0', '\0'};
+    tinygl_text(message);
+    /* tinygl_text("OOPS!"); */
     uint8_t tick = 0;
     while (true) {
         pacer_wait();
@@ -96,9 +96,9 @@ void display_result(void) {
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
     tinygl_text_dir_set(1);
     if (games_won == 3) {
-        tinygl_text("WINNER!! ");
+        tinygl_text(" WINNER!! ");
     } else {
-        tinygl_text("LOSER!! ");
+        tinygl_text(" LOSER!! ");
     }
     games_won = 0;
     games_lost = 0;
@@ -135,7 +135,7 @@ void poll_winner(void) {
     if (ir_uart_read_ready_p ()) {
         char winstate = ir_uart_getc ();
         if (winstate == '!') {
-            display_end_round(false);
+            display_end_round(true);
         }
     }
 

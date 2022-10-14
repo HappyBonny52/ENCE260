@@ -47,8 +47,8 @@ void move_y_pos(int8_t direction, Player_t* player) {
         player->ypos--;
     }
     // Block player from going off grid on y axis
-    if (player->ypos > BOARDHEIGHT - 1) {
-        player->ypos = BOARDHEIGHT - 1;
+    if (player->ypos > BOARDHEIGHT - 2) {
+        player->ypos = BOARDHEIGHT - 2;
     }
     if (player->ypos < 0) {
         player->ypos = 0;

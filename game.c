@@ -38,11 +38,12 @@ int main (void)
         pacer_wait();
         pio_output_low(LED1_PIO);
         tick ++;
-        
+        poll_winner();
+        ir_poll_bullets();
+
         if (tick % 2 == 0) {
             display_entity(player.xpos, player.ypos);
             display_main_bullets();
-            
         } else {
             tinygl_clear();
         }
@@ -52,12 +53,10 @@ int main (void)
             Action_e action = navswitch_poll();
             handle_player(&player, action);
         }
-        ir_poll_bullets();
 
         if (tick >= 40) {
             move_self_bullets();
             move_outgoing_bullets(&player);
-            poll_winner();
             tick = 0;
         }
     }
