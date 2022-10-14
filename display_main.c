@@ -73,11 +73,10 @@ void display_intro(void) {
 }
 
 /* Display the state of the game in each round*/
-void display_state(void) {
+static void display_state(void) {
     char message[4] = {games_won + '0', '-', games_lost + '0', '\0'};
     tinygl_text(message);
     /* tinygl_text("OOPS!"); */
-    uint8_t tick = 0;
     while (true) {
         pacer_wait();
         tinygl_update ();
@@ -86,12 +85,11 @@ void display_state(void) {
             tinygl_clear ();
             return;
         }
-        tick++;
     }
 }
 
 /* Display the result of the game */
-void display_result(void) {
+static void display_result(void) {
     /* Set the message using tinygl_text().  */
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
     tinygl_text_dir_set(1);
@@ -116,6 +114,8 @@ void display_result(void) {
 }
 
 /* Collecting score in order to identify proper display of each state */
+// NOTE: display_result and display_state are only called within this function
+// and nowhere else in the project so they should be private
 void display_end_round(bool win) {
     if (win) {
         games_won++;

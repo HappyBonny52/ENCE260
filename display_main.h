@@ -22,10 +22,10 @@ void display_intro(void);
 void display_end_round(bool);
 
 /* Display the state of the game in each round*/
-void display_state(void); 
+/* void display_state(void);  */
 
 /* Display the result of the game */
-void display_result(void); 
+/* void display_result(void);  */
 
 void poll_winner(void);
 
