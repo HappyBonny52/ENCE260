@@ -16,7 +16,7 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c ../../drivers/avr/system.h pacer.h display_main.h player.h ../../utils/tinygl.h
+game.o: game.c ../../drivers/avr/system.h ../../utils/pacer.h display_main.h player.h ../../utils/tinygl.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 display.o: ../../drivers/display.c ../../drivers/avr/system.h ../../drivers/display.h ../../drivers/ledmat.h
@@ -52,7 +52,7 @@ system.o: ../../drivers/avr/system.c ../../drivers/avr/system.h
 pio.o: ../../drivers/avr/pio.c ../../drivers/avr/pio.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-pacer.o: pacer.c ../../drivers/avr/system.h pacer.h
+pacer.o: ../../utils/pacer.c ../../drivers/avr/system.h ../../utils/pacer.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 player.o: player.c player.h
