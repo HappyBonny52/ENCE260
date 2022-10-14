@@ -7,6 +7,7 @@
 #include "navswitch.h"
 #include "pacer.h"
 #include "../fonts/font3x5_1.h"
+#include "ir_uart.h"
 
 #define PACER_RATE 500
 #define MESSAGE_RATE 30
@@ -118,11 +119,21 @@ void display_end_round(bool win) {
         games_won++;
     }
     else {
-        games_won--;
+        games_lost++;
     }
     if (games_won == 3 || games_lost == 3){
         display_result();
     } else {
         display_state();
     }
+}
+
+void poll_winner(void) {
+    if (ir_uart_read_ready_p ()) {
+        char winstate = ir_uart_getc ();
+        if (winstate == '!') {
+            display_end_round(false);
+        }
+    }
+
 }

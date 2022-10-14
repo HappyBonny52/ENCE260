@@ -28,10 +28,10 @@ int main (void)
 
     while (1)
     {
+        pacer_wait();
         pio_output_low(LED1_PIO);
         tick ++;
-        pacer_wait();
-
+        poll_winner();
         if (tick % 2 == 0) {
             display_entity(player.xpos, player.ypos);
             display_main_bullets();
@@ -46,7 +46,7 @@ int main (void)
         }
         ir_poll_bullets();
 
-        if (tick >= 50) {
+        if (tick >= 40) {
             move_self_bullets();
             move_outgoing_bullets(&player);
             tick = 0;

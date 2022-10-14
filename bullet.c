@@ -8,6 +8,8 @@
 #include "system.h"
 #include "pio.h"
 
+#define WIN_SIGNAL 10
+
 // Array of bullets where values are x axes and index is y axes
 static uint8_t self_bullets[BOARDHEIGHT + 1] = {0};
 static uint8_t outgoing_bullets[BOARDHEIGHT + 1] = {0};
@@ -38,15 +40,17 @@ void move_outgoing_bullets(Player_t *player) {
     if (outgoing_bullets[player->ypos] == player->xpos + 1) {
         pio_output_high(LED1_PIO);
         outgoing_bullets[player->ypos] = 0;
-        display_end_round(true);
+        ir_uart_putc('!');
+        display_end_round(false);
     }
 }
 
 void ir_poll_bullets(void) {
     if (ir_uart_read_ready_p ()) {
-        uint8_t outgoing_bullet = 0;
-        outgoing_bullet = ir_uart_getc ();
-        outgoing_bullets[4] = outgoing_bullet;
+        uint8_t outgoing_bullet = ir_uart_getc ();
+        if (outgoing_bullet < 8) {
+            outgoing_bullets[4] = outgoing_bullet;
+        }
     }
 }
 
