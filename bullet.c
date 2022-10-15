@@ -53,11 +53,18 @@ void move_outgoing_bullets(Player_t *player) {
     }
 }
 
-/* Receive the position of incoming bullet */
-void ir_poll_bullets(void) {
+/* Receive the outgoing ir signals */
+void ir_poll_signals(void) {
     if (ir_uart_read_ready_p ()) {
-        uint8_t outgoing_bullet = ir_uart_getc ();
-        outgoing_bullets[4] = outgoing_bullet;
+        uint8_t outgoing_signal = ir_uart_getc ();
+        // If bullet then place on our dot matrix
+        if (outgoing_signal < 8) {
+            outgoing_bullets[4] = outgoing_signal;
+        }
+        // If win signal then display win
+        if (outgoint_signal == '!') {
+            display_end_round(true);
+        }
     }
 }
 

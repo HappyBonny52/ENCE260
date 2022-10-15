@@ -38,8 +38,7 @@ int main (void)
         pacer_wait();
         pio_output_low(LED1_PIO);
         tick ++;
-        poll_winner();
-        ir_poll_bullets();
+        ir_poll_signals();
 
         if (tick % 2 == 0) {
             display_entity(player.xpos, player.ypos);

@@ -131,12 +131,12 @@ void display_end_round(bool win) {
 }
 
 
-void poll_winner(void) {
-    if (ir_uart_read_ready_p ()) {
-        char winstate = ir_uart_getc ();
-        if (winstate == '!') {
-            display_end_round(true);
-        }
-    }
-
-}
+/* void poll_winner(void) { */
+/*     if (ir_uart_read_ready_p ()) { */
+/*         char winstate = ir_uart_getc (); */
+/*         if (winstate == '!') { */
+/*             display_end_round(true); */
+/*         } */
+/*     } */
+/**/
+/* } */
