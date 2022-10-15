@@ -49,6 +49,8 @@ void display_main_init(void) {
     tinygl_text_dir_set(1);
 }
 
+
+/* Display a dot used for player, self bullet, outgoing bullets */
 void display_entity(int8_t x, int8_t y) {
     tinygl_point_t point = {.x = (BOARDHEIGHT - 1 - y), .y = x};
     tinygl_draw_point(point, 1);
@@ -56,7 +58,6 @@ void display_entity(int8_t x, int8_t y) {
 
 /* Display the start of the game */
 void display_intro(void) {
-    /* Set the message using tinygl_text().  */
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
     tinygl_text_dir_set(1);
     tinygl_text("SHOOT OR DODGE!");
@@ -65,8 +66,6 @@ void display_intro(void) {
         tinygl_update ();
         navswitch_update();
         if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
-            /* Initialise the pins of the LED matrix.  */
-            /* display_main_init(); */
             tinygl_clear ();
             return;
         }
@@ -77,7 +76,6 @@ void display_intro(void) {
 static void display_state(void) {
     char message[4] = {games_won + '0', '-', games_lost + '0', '\0'};
     tinygl_text(message);
-    /* tinygl_text("OOPS!"); */
     while (true) {
         pacer_wait();
         tinygl_update ();
@@ -106,8 +104,6 @@ static void display_result(void) {
         tinygl_update ();
         navswitch_update();
         if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
-            /* Initialise the pins of the LED matrix.  */
-            /* display_main_init(); */
             tinygl_clear ();
             return;
         }
@@ -129,15 +125,4 @@ void display_end_round(bool win) {
     } else {
         display_state();
     }
-}
-
-
-void poll_winner(void) {
-    if (ir_uart_read_ready_p ()) {
-        uint8_t winstate = ir_uart_getc ();
-        if (winstate == '!') {
-            display_end_round(true);
-        }
-    }
-
 }

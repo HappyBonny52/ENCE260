@@ -13,6 +13,7 @@
 /* Initialise tinygl and display. */
 void display_main_init(void);
 
+/* Display a dot used for player, self bullet, outgoing bullets */
 void display_entity(int8_t x, int8_t y);
 
 /* Display the start of the game */
@@ -21,12 +22,5 @@ void display_intro(void);
 /* Collecting score in order to identify proper display of each state */
 void display_end_round(bool);
 
-/* Display the state of the game in each round*/
-/* void display_state(void);  */
-
-/* Display the result of the game */
-/* void display_result(void);  */
-
-void poll_winner(void);
 
 #endif // !DISPLAY_MAIN_H

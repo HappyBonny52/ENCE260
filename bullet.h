@@ -20,7 +20,7 @@ the array state of player needed to check if the bullet reached the player or no
 void move_outgoing_bullets(Player_t *player);
 
 /* Receive the position of incoming bullet */
-void ir_poll_bullets(void);
+void ir_poll_signals(void);
 
 /* Display player's bullets in matrix */
 void display_main_bullets(void);
