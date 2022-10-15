@@ -21,6 +21,7 @@
 static uint8_t games_won = 0;
 static uint8_t games_lost = 0;
 
+
 /* Useful arrays for mapping columns and rows on pio
  * NOTE: Columns and rows are swapped from the datasheet model
  * as the game is designed for the funkit to be played sideways. */
@@ -133,7 +134,7 @@ void display_end_round(bool win) {
 
 void poll_winner(void) {
     if (ir_uart_read_ready_p ()) {
-        char winstate = ir_uart_getc ();
+        uint8_t winstate = ir_uart_getc ();
         if (winstate == '!') {
             display_end_round(true);
         }
