@@ -10,6 +10,9 @@
 #include "player.h"
 #include <stdbool.h>
 
+#define PACER_RATE 500
+#define MESSAGE_RATE 30
+
 /* Initialise tinygl and display. */
 void display_main_init(void);
 
