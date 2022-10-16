@@ -22,7 +22,7 @@ static uint8_t games_lost = 0;
 
 
 /* Initialise tinygl and display. */
-void display_init(void) {
+void displays_init(void) {
     tinygl_init(PACER_RATE);
     tinygl_font_set(&font3x5_1);
     tinygl_text_speed_set(MESSAGE_RATE); //MESSAGE_RATE : the speed of the displayed message

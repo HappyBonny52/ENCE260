@@ -15,7 +15,7 @@
 #define MESSAGE_RATE 30
 
 /* Initialise tinygl and display. */
-void display_init(void);
+void displays_init(void);
 
 /* Display a dot used for player, self bullet, outgoing bullets */
 void display_entity(int8_t x, int8_t y);
