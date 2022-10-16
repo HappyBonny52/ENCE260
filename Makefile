@@ -1,5 +1,6 @@
 # File:   Makefile
-# Author: M. P. Hayes, UCECE
+# Author: Aaron Sevilla, ase89 
+# Author: Bonghyun Kwon, bkw31
 # Date:   12 Sep 2010
 # Descr:  Makefile for game
 
@@ -16,7 +17,7 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c ../../drivers/avr/system.h ../../utils/pacer.h display_main.h player.h ../../utils/tinygl.h
+game.o: game.c ../../drivers/avr/system.h ../../utils/pacer.h displays.h player.h ../../utils/tinygl.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 display.o: ../../drivers/display.c ../../drivers/avr/system.h ../../drivers/display.h ../../drivers/ledmat.h
@@ -58,7 +59,7 @@ pacer.o: ../../utils/pacer.c ../../drivers/avr/system.h ../../utils/pacer.h
 player.o: player.c player.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-display_main.o: display_main.c ../../drivers/avr/system.h ../../drivers/avr/pio.h player.h display_main.h ../../drivers/navswitch.h
+displays.o: displays.c ../../drivers/avr/system.h ../../drivers/avr/pio.h player.h displays.h ../../drivers/navswitch.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 navswitch.o: ../../drivers/navswitch.c ../../drivers/avr/delay.h ../../drivers/avr/pio.h ../../drivers/avr/system.h ../../drivers/navswitch.h
@@ -74,7 +75,7 @@ task.o: ../../utils/task.c ../../drivers/avr/system.h ../../drivers/avr/timer.h 
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
-game.out: game.o system.o pio.o pacer.o player.o display_main.o navswitch.o controls.o bullet.o tinygl.o font.o display.o ledmat.o ir_uart.o usart1.o timer0.o timer.o prescale.o task.o
+game.out: game.o system.o pio.o pacer.o player.o displays.o navswitch.o controls.o bullet.o tinygl.o font.o display.o ledmat.o ir_uart.o usart1.o timer0.o timer.o prescale.o task.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

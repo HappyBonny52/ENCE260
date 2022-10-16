@@ -1,7 +1,8 @@
 /** @file   player.c
-    @author Aaron Sevilla
+    @author Aaron Sevilla, ase89 
     @date   5 October 2022
     @brief  Control player's position and state.
+    @note   Columns and rows are swapped from the datasheet model as the game is designed for the funkit to be played sideways.
 */
 #include <stdio.h>
 #include <stdint.h>
@@ -16,10 +17,10 @@ Player_t player_init (int8_t xpos, int8_t ypos) {
     return (Player_t) {.xpos = xpos, .ypos = ypos};
 }
 
-
 /** The pixel state of player moving vertical.
     @param direction 1 for player moves one row down and -1 for player moves one row up
-    @param player get the position of player to control x axis movement*/
+    @param player get the position of player to control x axis movement
+    @note The 'rows' here are also in reverse order such that the row closest to the nav switch is considered 0 while the furthest row is considered 5. */
 void move_x_pos(int8_t direction, Player_t* player) {
     if (direction == 1) {
         player->xpos++;

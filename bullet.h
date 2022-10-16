@@ -1,5 +1,6 @@
 /** @file   bullet.h
-    @author Aaron Sevilla, Bonghyun Kwon
+    @author Aaron Sevilla, ase89 
+    @author Bonghyun Kwon, bkw31
     @date   15 October 2022
     @brief  For controlling bullets's position and state.
 */
@@ -23,6 +24,6 @@ void move_outgoing_bullets(Player_t *player);
 void ir_poll_signals(void);
 
 /* Display player's bullets in matrix */
-void display_main_bullets(void);
+void displays_bullets(void);
 
 #endif // !BULLET_H

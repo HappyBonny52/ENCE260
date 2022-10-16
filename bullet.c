@@ -1,5 +1,6 @@
 /** @file   bullet.c
-    @author Aaron Sevilla, Bonghyun Kwon
+    @author Aaron Sevilla, ase89 
+    @author Bonghyun Kwon, bkw31
     @date   15 October 2022
     @brief  Control bullets's position and state.
 */
@@ -8,7 +9,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "bullet.h"
-#include "display_main.h"
+#include "displays.h"
 #include "ir_uart.h"
 #include "tinygl.h"
 #include "system.h"
@@ -69,7 +70,7 @@ void ir_poll_signals(void) {
 }
 
 /* Display player's bullets in matrix */
-void display_main_bullets(void) {
+void displays_bullets(void) {
     for (size_t i = 0; i < BOARDHEIGHT; i++) {
         display_entity(self_bullets[i] - 1, i);
         display_entity(outgoing_bullets[i] - 1, i);

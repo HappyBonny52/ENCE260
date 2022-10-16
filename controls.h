@@ -1,5 +1,5 @@
 /** @file   controls.h
-    @author Aaron Sevilla
+    @author Aaron Sevilla, ase89 
     @date   5 October 2022
     @brief  Control player's position and state by naviswith
 */

@@ -1,11 +1,12 @@
-/** @file   display_main.h
-    @author Aaron Sevilla, Bonghyun Kwon
+/** @file   displays.h
+    @author Aaron Sevilla, ase89 
+    @author Bonghyun Kwon, bkw31
     @date   15 October 2022
     @brief  Displaying game state
 */
 
-#ifndef DISPLAY_MAIN_H
-#define DISPLAY_MAIN_H
+#ifndef displays_H
+#define displays_H
 
 #include "player.h"
 #include <stdbool.h>
@@ -14,7 +15,7 @@
 #define MESSAGE_RATE 30
 
 /* Initialise tinygl and display. */
-void display_main_init(void);
+void display_init(void);
 
 /* Display a dot used for player, self bullet, outgoing bullets */
 void display_entity(int8_t x, int8_t y);
@@ -26,4 +27,4 @@ void display_intro(void);
 void display_end_round(bool);
 
 
-#endif // !DISPLAY_MAIN_H
+#endif // !displays_H

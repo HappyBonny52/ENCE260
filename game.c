@@ -1,11 +1,12 @@
 /** @file   game.c
-    @author Aaron Sevilla, Bonghyun Kwon
+    @author Aaron Sevilla, ase89
+    @author Bonghyun Kwon, bkw31
     @date   14 October 2022
     @brief  
 */
 #include "system.h"
 #include "pio.h"
-#include "display_main.h"
+#include "displays.h"
 #include "player.h"
 #include "pacer.h"
 #include "controls.h"
@@ -19,13 +20,12 @@
 #define MESSAGE_RATE 30
 
 
-
 int main (void)
 {
     system_init ();
     pio_config_set(LED1_PIO, PIO_OUTPUT_LOW);
     pacer_init (PACER_RATE);
-    display_main_init ();
+    displays_init ();
     navswitch_init ();
     ir_uart_init ();
 
@@ -42,7 +42,7 @@ int main (void)
 
         if (tick % 2 == 0) {
             display_entity(player.xpos, player.ypos);
-            display_main_bullets();
+            displays_bullets();
         } else {
             tinygl_clear();
         }
