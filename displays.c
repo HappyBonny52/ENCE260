@@ -41,7 +41,7 @@ void display_entity(int8_t x, int8_t y) {
 void display_intro(void) {
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
     tinygl_text_dir_set(1);
-    tinygl_text("SHOOT OR DODGE!");
+    tinygl_text("SHOOT & DODGE!");
     while (true) {
         pacer_wait();
         tinygl_update ();

@@ -34,7 +34,6 @@ void move_self_bullets(void) {
     if (self_bullets[BOARDHEIGHT] > 0) {
         uint8_t outgoing_bullet = 0;
         outgoing_bullet = 8 - (self_bullets[BOARDHEIGHT]);
-        /* outgoing_bullets[4] = outgoing_bullet; */
         ir_uart_putc (outgoing_bullet);
     }
 }

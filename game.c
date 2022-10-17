@@ -1,8 +1,8 @@
 /** @file   game.c
     @author Aaron Sevilla, ase89
     @author Bonghyun Kwon, bkw31
-    @date   14 October 2022
-    @brief  
+    @date   17 October 2022
+    @brief  A simple shooting game for 2 players
 */
 #include "system.h"
 #include "pio.h"
@@ -19,9 +19,10 @@
 #define PACER_RATE 500
 #define MESSAGE_RATE 30
 
-
+/* Main Game loop */
 int main (void)
 {
+    /* Initialize display, buttons, Ir_uart, etc.*/
     system_init ();
     pio_config_set(LED1_PIO, PIO_OUTPUT_LOW);
     pacer_init (PACER_RATE);
@@ -33,6 +34,8 @@ int main (void)
     uint8_t tick = 0;
     display_intro();
 
+    /* Playing games and showing each state will be repeated 
+    *  until all the matches completed */
     while (1)
     {
         pacer_wait();

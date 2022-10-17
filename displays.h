@@ -2,7 +2,7 @@
     @author Aaron Sevilla, ase89 
     @author Bonghyun Kwon, bkw31
     @date   15 October 2022
-    @brief  Displaying game state
+    @brief  Displaying game states
 */
 
 #ifndef displays_H

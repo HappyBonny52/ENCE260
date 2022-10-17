@@ -1,7 +1,7 @@
 # File:   Makefile
 # Author: Aaron Sevilla, ase89 
 # Author: Bonghyun Kwon, bkw31
-# Date:   12 Sep 2010
+# Date:   17 Oct 2022
 # Descr:  Makefile for game
 
 # Definitions.
