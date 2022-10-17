@@ -3,7 +3,6 @@
 "SHOOT & DODGE" is a shooting game for 2 players with 2 UCFK4s.\
 This README file is to help you how to run and play this shooting game.
 
----
 
 <br /> 
 
@@ -15,7 +14,6 @@ to shoot the other opponent as many as possible within three matches.
 
 <br /> 
 
----
 <br /> 
 
 ## How to run the game
@@ -30,7 +28,7 @@ make program
 
 <br /> 
 
-____
+
 
 <br /> 
 
@@ -85,7 +83,6 @@ Player can move anywhere within matrix boundary.
 *The bullet is going out in a same direction from where the player was when the player shot.*
 <br /> 
 
-<br /> 
 
 #### ***3) LED***  
 
@@ -131,7 +128,6 @@ it starts with introduction display, and display will be shown on the matrix.
 
 <br /> 
 
----
 
 ## Contributers
 
