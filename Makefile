@@ -2,7 +2,7 @@
 # Author: Aaron Sevilla, ase89 
 # Author: Bonghyun Kwon, bkw31
 # Date:   17 Oct 2022
-# Descr:  Makefile for game
+# Descr:  Makefile for SHOOT & DODGE game
 
 # Definitions.
 CC = avr-gcc
