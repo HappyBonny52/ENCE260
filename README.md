@@ -91,7 +91,7 @@ Player can move anywhere within matrix boundary.
 
 <br /> 
 
-***4) Reset Button***
+#### ***4) Reset Button***
 - This button is for turning off the game.
 - You can play it again by following [How to run the game](#how-to-run-the-game) process. 
 
