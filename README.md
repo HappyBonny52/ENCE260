@@ -1,8 +1,9 @@
-
 # SHOOT & DODGE
 "SHOOT & DODGE" is a shooting game for 2 players with 2 UCFK4s.\
 This README file is to help you how to run and play this shooting game.
 
+## Contents
+[[_TOC_]]
 
 <br /> 
 
@@ -115,7 +116,7 @@ it starts with introduction display, and display will be shown on the matrix.
 
 <br />
 
-#### ***Steps :***
+#### ***Steps***
 <br /> 
 
 - **Step 1** : Press navigation switch down to start the game
