@@ -11,6 +11,7 @@
 #include "player.h"
 
 #define WIN_SIGNAL '!' //Exclamation marks indicating win flag to be sent to the other funkit through IR_transmitter
+#define OUT_OF_BULLET_RANGE 8 //8 for indicating the bullet out of range as it can be in range 1 to 7 
 
 /* The array state of bullet's staring point */
 void spawn_bullet(Player_t *player);

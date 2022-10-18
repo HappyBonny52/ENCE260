@@ -15,8 +15,6 @@
 #include "system.h"
 #include "pio.h"
 
-#define WIN_SIGNAL '!'
-
 // Array of bullets where values are x axes and index is y axes
 static uint8_t self_bullets[BOARDHEIGHT + 1] = {0};
 static uint8_t outgoing_bullets[BOARDHEIGHT + 1] = {0};
@@ -35,7 +33,7 @@ void move_self_bullets(void) {
     }
     if (self_bullets[BOARDHEIGHT] > 0) {
         uint8_t outgoing_bullet = 0;
-        outgoing_bullet = 8 - (self_bullets[BOARDHEIGHT]); //To calculate the inverted position of bullet in the other funkit
+        outgoing_bullet = OUT_OF_BULLET_RANGE - (self_bullets[BOARDHEIGHT]); //To calculate the inverted position of bullet in the other funkit
         ir_uart_putc (outgoing_bullet);
     }
 }
@@ -59,8 +57,8 @@ void move_outgoing_bullets(Player_t *player) {
 void ir_poll_signals(void) {
     if (ir_uart_read_ready_p ()) {
         uint8_t outgoing_signal = ir_uart_getc ();
-        // If bullet then place on our dot matrix, since the bullet position in the range of 1-7
-        if (outgoing_signal < 8) {
+        // If bullet then place on our dot matrix
+        if (outgoing_signal < OUT_OF_BULLET_RANGE) {
             outgoing_bullets[4] = outgoing_signal;
         }
         // If win signal then display win
