@@ -31,7 +31,9 @@ void displays_init(void) {
 }
 
 
-/* Display a dot used for player, self bullet, outgoing bullets */
+/** Display a dot used for player, self bullet, outgoing bullets
+    @param x To display entity's position in x axis 
+    @param y To display entity's position in y axis  */  
 void display_entity(int8_t x, int8_t y) {
     tinygl_point_t point = {.x = (BOARDHEIGHT - 1 - y), .y = x};
     tinygl_draw_point(point, 1);
@@ -41,7 +43,7 @@ void display_entity(int8_t x, int8_t y) {
 void display_intro(void) {
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
     tinygl_text_dir_set(1);
-    tinygl_text("SHOOT & DODGE!");
+    tinygl_text("SHOOT AND DODGE!");
     while (true) {
         pacer_wait();
         tinygl_update ();
@@ -55,7 +57,7 @@ void display_intro(void) {
 
 /* Display the state of the game in each round*/
 static void display_state(void) {
-    char message[4] = {games_won + '0', '-', games_lost + '0', '\0'};
+    char message[4] = {games_won + '0', '-', games_lost + '0', '\0'}; //For displaying score of each player
     tinygl_text(message);
     while (true) {
         pacer_wait();
@@ -91,9 +93,10 @@ static void display_result(void) {
     }
 }
 
-/* Collecting score in order to identify proper display of each state */
-// NOTE: display_result and display_state are only called within this function
-// and nowhere else in the project so they should be private
+/** Collecting score in order to identify proper display of each state 
+   @param win if win is true, acculmulate win_score else accumulate lose_score and if either reaches three, display_result else display_state 
+   @note: display_result and display_state are only called within this function
+   and nowhere else in the project so they should be private */
 void display_end_round(bool win) {
     if (win) {
         games_won++;

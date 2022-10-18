@@ -40,7 +40,6 @@ This will help you understand what these components do and each phase of playing
 
 <br /> 
 
-
 <br /> 
 
 ### **Components**
@@ -48,7 +47,6 @@ This will help you understand what these components do and each phase of playing
 <br />
 
 <img src="./Images/Components%20in%20UCFK4.png" width="400" height="300" >
-
 
 
 <br /> 

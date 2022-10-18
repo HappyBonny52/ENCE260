@@ -19,7 +19,7 @@
 #define PACER_RATE 500
 #define MESSAGE_RATE 30
 
-/* Main Game loop */
+/* Main game loop for 'SHOOT and DOGDGE' */
 int main (void)
 {
     /* Initialize display, buttons, Ir_uart, etc.*/

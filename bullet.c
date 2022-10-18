@@ -33,13 +33,13 @@ void move_self_bullets(void) {
     }
     if (self_bullets[BOARDHEIGHT] > 0) {
         uint8_t outgoing_bullet = 0;
-        outgoing_bullet = 8 - (self_bullets[BOARDHEIGHT]);
+        outgoing_bullet = 8 - (self_bullets[BOARDHEIGHT]); //To calculate the inverted position of bullet in the other funkit
         ir_uart_putc (outgoing_bullet);
     }
 }
 
-/** The array state of bullet in the other funkit that the local player shoot
-    @param player To verify if the bullet reached player or not */  
+/** The array state of bullet in the other funkit that the other player shoot
+    @param player To verify if the bullet reached the other player or not */  
 void move_outgoing_bullets(Player_t *player) {
     for (size_t i = 0; i < BOARDHEIGHT - 1; i++) {
         outgoing_bullets[i] = outgoing_bullets[i + 1];
@@ -48,7 +48,7 @@ void move_outgoing_bullets(Player_t *player) {
     if (outgoing_bullets[player->ypos] == player->xpos + 1) {
         pio_output_high(LED1_PIO);
         outgoing_bullets[player->ypos] = 0;
-        ir_uart_putc('!');
+        ir_uart_putc(WIN_SIGNAL);
         display_end_round(false);
     }
 }
@@ -57,12 +57,12 @@ void move_outgoing_bullets(Player_t *player) {
 void ir_poll_signals(void) {
     if (ir_uart_read_ready_p ()) {
         uint8_t outgoing_signal = ir_uart_getc ();
-        // If bullet then place on our dot matrix
+        // If bullet then place on our dot matrix, since the bullet position in the range of 1-7
         if (outgoing_signal < 8) {
             outgoing_bullets[4] = outgoing_signal;
         }
         // If win signal then display win
-        if (outgoing_signal == '!') {
+        if (outgoing_signal == WIN_SIGNAL) {
             display_end_round(true);
         }
     }

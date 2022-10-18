@@ -29,7 +29,9 @@ Action_e navswitch_poll(void) {
     return (Action_e) null;
 }
 
-/* Player handler for each action */
+/** Player handler for each action 
+    @param player Player to be handled 
+    @param action To indicate what action to be conducted on player  */ 
 void handle_player(Player_t *player, Action_e action) {
     switch (action) {
         case left:

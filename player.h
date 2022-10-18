@@ -20,13 +20,21 @@ typedef struct Player_t {
     int8_t ypos;
 } Player_t;
 
-/* Initialize player's position.*/
+/** Initialize player's position.
+    @param xpos pixel row
+    @param ypos pixel column
+    @return player's position in matrix  */
 Player_t player_init (int8_t xpos, int8_t ypos);
 
-/* The pixel state of player moving vertical.*/
+/** The pixel state of player moving vertical.
+    @param direction 1 for player moves one row down and -1 for player moves one row up
+    @param player get the position of player to control x axis movement
+    @note The 'rows' here are also in reverse order such that the row closest to the nav switch is considered 0 while the furthest row is considered 5. */
 void move_x_pos(int8_t direction, Player_t* player);
 
-/* The pixel state of player moving horizontal.*/
+/** The pixel state of player moving horizontal.
+    @param direction 1 for player moves one col up and -1 for player moves one col down
+    @param player get the position of player to control y axis movement*/  
 void move_y_pos(int8_t direction, Player_t* player);
 
 #endif // !PLAYER_H
