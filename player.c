@@ -23,10 +23,10 @@ Player_t player_init (int8_t xpos, int8_t ypos) {
     @param player get the position of player to control x axis movement
     @note The 'rows' here are also in reverse order such that the row closest to the nav switch is considered 0 while the furthest row is considered 5. */
 void move_x_pos(int8_t direction, Player_t* player) {
-    if (direction == 1) {
+    if (direction == RIGHT) {
         player->xpos++;
     }
-    if (direction == -1) {
+    if (direction == LEFT) {
         player->xpos--;
     }
     // When player is off grid wrap to other side on x axis
@@ -42,10 +42,10 @@ void move_x_pos(int8_t direction, Player_t* player) {
     @param direction 1 for player moves one col up and -1 for player moves one col down
     @param player get the position of player to control y axis movement*/  
 void move_y_pos(int8_t direction, Player_t* player) {
-    if (direction == 1) {
+    if (direction == UP) {
         player->ypos++;
     }
-    if (direction == -1) {
+    if (direction == DOWN) {
         player->ypos--;
     }
     // Block player from going off grid on y axis

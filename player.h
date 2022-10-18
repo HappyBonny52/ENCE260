@@ -11,10 +11,14 @@
 
 #include <stdint.h>
 
-#define BOARDWIDTH 7  // in x axis
-#define BOARDHEIGHT 5 // in y axis 
+#define BOARDWIDTH 7  
+#define BOARDHEIGHT 5 
+#define UP 1
+#define DOWN (-1)
+#define LEFT 1
+#define RIGHT (-1)
 
-/* Player state structure.  */
+/* Player state structure.*/
 typedef struct Player_t {
     int8_t xpos;
     int8_t ypos;
