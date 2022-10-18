@@ -15,6 +15,8 @@
 #include "system.h"
 #include "pio.h"
 
+#define WIN_SIGNAL '!'
+
 // Array of bullets where values are x axes and index is y axes
 static uint8_t self_bullets[BOARDHEIGHT + 1] = {0};
 static uint8_t outgoing_bullets[BOARDHEIGHT + 1] = {0};
