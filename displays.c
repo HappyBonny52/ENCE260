@@ -6,6 +6,7 @@
 */
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include "tinygl.h"
 #include "system.h"
 #include "pio.h"
@@ -42,7 +43,7 @@ void display_entity(int8_t x, int8_t y) {
 /* Display the start of the game */
 void display_intro(void) {
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
-    tinygl_text_dir_set(1);
+    tinygl_text_dir_set(true);
     tinygl_text("SHOOT AND DODGE!");
     while (true) {
         pacer_wait();
@@ -57,7 +58,7 @@ void display_intro(void) {
 
 /* Display the state of the game in each round*/
 static void display_state(void) {
-    char message[4] = {games_won + '0', '-', games_lost + '0', '\0'}; //For displaying score of each player
+    char message[MESSAGE_LENGTH] = {games_won + '0', '-', games_lost + '0', '\0'}; //For displaying score of each player
     tinygl_text(message);
     while (true) {
         pacer_wait();
@@ -74,14 +75,14 @@ static void display_state(void) {
 static void display_result(void) {
     /* Set the message using tinygl_text().  */
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
-    tinygl_text_dir_set(1);
-    if (games_won == 3) {
+    tinygl_text_dir_set(true);
+    if (games_won == MAX_SCORE) {
         tinygl_text(" WINNER!! ");
     } else {
         tinygl_text(" LOSER!! ");
     }
-    games_won = 0;
-    games_lost = 0;
+    games_won = MIN_SCORE;
+    games_lost = MIN_SCORE;
     while (true) {
         pacer_wait();
         tinygl_update ();
@@ -104,7 +105,7 @@ void display_end_round(bool win) {
     else {
         games_lost++;
     }
-    if (games_won == 3 || games_lost == 3){
+    if (games_won == MAX_SCORE || games_lost == MAX_SCORE){
         display_result();
     } else {
         display_state();

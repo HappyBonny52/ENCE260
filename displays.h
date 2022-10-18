@@ -13,6 +13,10 @@
 
 #define PACER_RATE 500
 #define MESSAGE_RATE 30
+#define MAX_SCORE 3
+#define MIN_SCORE 0
+#define MESSAGE_LENGTH 4
+
 
 /* Initialise tinygl and display. */
 void displays_init(void);

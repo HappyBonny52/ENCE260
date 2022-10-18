@@ -59,7 +59,7 @@ void ir_poll_signals(void) {
         uint8_t outgoing_signal = ir_uart_getc ();
         // If bullet then place on our dot matrix
         if (outgoing_signal < OUT_OF_BULLET_RANGE) {
-            outgoing_bullets[4] = outgoing_signal;
+            outgoing_bullets[TOP_OF_SCREEN] = outgoing_signal;
         }
         // If win signal then display win
         if (outgoing_signal == WIN_SIGNAL) {

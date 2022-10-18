@@ -19,6 +19,8 @@
 #define MESSAGE_RATE 30
 #define NAVIGATION_RATE 20
 #define BULLET_RATE 40
+#define START_X_POS 3
+#define START_Y_POS 0
 
 /* Main game loop for 'SHOOT and DOGDGE' */
 int main (void)
@@ -31,7 +33,7 @@ int main (void)
     navswitch_init ();
     ir_uart_init ();
 
-    Player_t player = player_init(3, 0);
+    Player_t player = player_init(START_X_POS, START_Y_POS);
     uint8_t tick = 0;
     display_intro();
 
