@@ -1,5 +1,6 @@
 /** @file   player.h
-    @author Aaron Sevilla
+    @author Aaron Sevilla, ase89
+    @author Bonghyun Kwon, bkw31
     @date   5 October 2022
     @brief  Control player's position and state.
     @note Player use x axis for row and y axis for column

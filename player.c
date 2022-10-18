@@ -1,5 +1,6 @@
 /** @file   player.c
-    @author Aaron Sevilla, ase89 
+    @author Aaron Sevilla, ase89
+    @author Bonghyun Kwon, bkw31
     @date   5 October 2022
     @brief  Control player's position and state.
     @note   Columns and rows are swapped from the datasheet model as the game is designed for the funkit to be played sideways.
