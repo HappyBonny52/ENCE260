@@ -18,6 +18,8 @@
 
 #define PACER_RATE 500
 #define MESSAGE_RATE 30
+#define NAVIGATION_RATE 20
+#define BULLET_RATE 40
 
 /* Main Game loop */
 int main (void)
@@ -51,12 +53,12 @@ int main (void)
         }
         tinygl_update();
 
-        if ((tick % 20) == 0) {
+        if ((tick % NAVIGATION_RATE) == 0) {
             Action_e action = navswitch_poll();
             handle_player(&player, action);
         }
 
-        if (tick >= 40) {
+        if (tick >= BULLET_RATE) {
             move_self_bullets();
             move_outgoing_bullets(&player);
             tick = 0;

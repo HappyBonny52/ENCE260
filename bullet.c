@@ -15,6 +15,8 @@
 #include "system.h"
 #include "pio.h"
 
+#define WIN_SIGNAL '!'
+
 // Array of bullets where values are x axes and index is y axes
 static uint8_t self_bullets[BOARDHEIGHT + 1] = {0};
 static uint8_t outgoing_bullets[BOARDHEIGHT + 1] = {0};
@@ -33,6 +35,7 @@ void move_self_bullets(void) {
     }
     if (self_bullets[BOARDHEIGHT] > 0) {
         uint8_t outgoing_bullet = 0;
+        // Mirror column of bullet to other funkit
         outgoing_bullet = 8 - (self_bullets[BOARDHEIGHT]);
         ir_uart_putc (outgoing_bullet);
     }
@@ -48,7 +51,7 @@ void move_outgoing_bullets(Player_t *player) {
     if (outgoing_bullets[player->ypos] == player->xpos + 1) {
         pio_output_high(LED1_PIO);
         outgoing_bullets[player->ypos] = 0;
-        ir_uart_putc('!');
+        ir_uart_putc(WIN_SIGNAL);
         display_end_round(false);
     }
 }
@@ -62,7 +65,7 @@ void ir_poll_signals(void) {
             outgoing_bullets[4] = outgoing_signal;
         }
         // If win signal then display win
-        if (outgoing_signal == '!') {
+        if (outgoing_signal == WIN_SIGNAL) {
             display_end_round(true);
         }
     }
