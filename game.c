@@ -9,7 +9,6 @@
 #include "displays.h"
 #include "player.h"
 #include "pacer.h"
-#include "controls.h"
 #include "navswitch.h"
 #include "bullet.h"
 #include "tinygl.h"

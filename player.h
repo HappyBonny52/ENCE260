@@ -20,6 +20,15 @@ typedef struct Player_t {
     int8_t ypos;
 } Player_t;
 
+typedef enum Action_e {
+    null,
+    left,
+    down,
+    right,
+    up,
+    attack,
+} Action_e;
+
 /** Initialize player's position.
     @param xpos pixel row
     @param ypos pixel column
@@ -36,5 +45,13 @@ void move_x_pos(int8_t direction, Player_t* player);
     @param direction 1 for player moves one col up and -1 for player moves one col down
     @param player get the position of player to control y axis movement*/  
 void move_y_pos(int8_t direction, Player_t* player);
+
+/* Set the player's action by naviswitch event */
+Action_e navswitch_poll(void);
+
+/** Player handler for each action 
+    @param player Player to be handled 
+    @param action To indicate what action to be conducted on player  */ 
+void handle_player(Player_t *player, Action_e action);
 
 #endif // !PLAYER_H
